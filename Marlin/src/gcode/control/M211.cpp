@@ -35,11 +35,11 @@
 void GcodeSuite::M211() {
   if (parser.seen('S'))
     soft_endstop._enabled = parser.value_bool();
-  else
-    M211_report();
+  //else
+  //  M211_report();
 }
 
-void GcodeSuite::M211_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M211_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F(STR_SOFT_ENDSTOPS));
   SERIAL_ECHOPGM("  M211 S", AS_DIGIT(soft_endstop._enabled), " ; ");
   serialprintln_onoff(soft_endstop._enabled);
@@ -49,6 +49,6 @@ void GcodeSuite::M211_report(const bool forReplay/*=true*/) {
                   l_soft_max = soft_endstop.max.asLogical();
   print_pos(l_soft_min, F(STR_SOFT_MIN), F(" "));
   print_pos(l_soft_max, F(STR_SOFT_MAX));
-}
+}*/
 
 #endif // HAS_SOFTWARE_ENDSTOPS

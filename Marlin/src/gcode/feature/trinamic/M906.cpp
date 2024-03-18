@@ -230,7 +230,7 @@ void GcodeSuite::M906() {
   }
 }
 
-void GcodeSuite::M906_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M906_report(const bool forReplay=true) {
   report_heading(forReplay, F(STR_STEPPER_DRIVER_CURRENT));
 
   auto say_M906 = [](const bool forReplay) {
@@ -329,6 +329,6 @@ void GcodeSuite::M906_report(const bool forReplay/*=true*/) {
     SERIAL_ECHOLNPGM(" T7 E", stepperE7.getMilliamps());
   #endif
   SERIAL_EOL();
-}
+}*/
 
 #endif // HAS_TRINAMIC_CONFIG

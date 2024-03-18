@@ -797,7 +797,7 @@ class Temperature {
 
     #if HAS_USER_THERMISTORS
       static user_thermistor_t user_thermistor[USER_THERMISTORS];
-      static void M305_report(const uint8_t t_index, const bool forReplay=true);
+      //static void M305_report(const uint8_t t_index, const bool forReplay=true);
       static void reset_user_thermistors();
       static celsius_float_t user_thermistor_to_deg_c(const uint8_t t_index, const raw_adc_t raw);
       static bool set_pull_up_res(int8_t t_index, float value) {

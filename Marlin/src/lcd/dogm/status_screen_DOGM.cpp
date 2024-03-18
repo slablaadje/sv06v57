@@ -192,14 +192,13 @@
 #define PROGRESS_BAR_WIDTH (LCD_PIXEL_WIDTH - PROGRESS_BAR_X)
 
 FORCE_INLINE void _draw_centered_temp(const celsius_t temp, const uint8_t tx, const uint8_t ty) {
-  if (temp < 0)
-    lcd_put_u8str(tx - 3 * (INFO_FONT_WIDTH) / 2 + 1, ty, F("err"));
-  else {
-    const char *str = i16tostr3rj(temp);
-    const uint8_t len = str[0] != ' ' ? 3 : str[1] != ' ' ? 2 : 1;
-    lcd_put_u8str(tx - len * (INFO_FONT_WIDTH) / 2 + 1, ty, &str[3-len]);
-    lcd_put_lchar(LCD_STR_DEGREE[0]);
-  }
+  const char *str;
+  uint8_t len;
+  str = i16tostr3left(temp);
+  len = strlen(str);
+  lcd_moveto(tx + 1 - len * (INFO_FONT_WIDTH) / 2, ty);
+  lcd_put_u8str(str);
+  lcd_put_lchar(LCD_STR_DEGREE[0]);
 }
 
 #if DO_DRAW_FLOWMETER
@@ -451,13 +450,15 @@ FORCE_INLINE void _draw_axis_value(const AxisEnum axis, const char *value, const
 
 #if HAS_EXTRA_PROGRESS
 
-  static void prepare_time_string(const duration_t &time, char prefix) {
-    char str[13];
-    memset(&bufferc[2], 0x20, 5); // partialy fill with spaces to avoid artifacts and terminator
-    bufferc[0] = prefix;
-    bufferc[1] = ':';
-    int str_length = time.toDigital(str, time.value >= 60*60*24L);
-    strcpy(&bufferc[sizeof(bufferc) - str_length - 1], str);
+  static void prepare_time_string(const duration_t &time) {
+    char str1[6];
+    memset(&bufferc[5], 0x20, 5); // partialy fill with spaces to avoid artifacts and terminator
+
+    time.toDigital(str1);
+    strcpy(&bufferc[0], str1);
+
+    strcpy(&bufferc[8], ui8tostr3rj(progress / (PROGRESS_SCALE)));
+    bufferc[11] = '%';
   }
 
   #if ENABLED(SHOW_PROGRESS_PERCENT)
@@ -475,7 +476,7 @@ FORCE_INLINE void _draw_axis_value(const AxisEnum axis, const char *value, const
   #if ENABLED(SHOW_REMAINING_TIME)
     void MarlinUI::drawRemain() {
       if (printJobOngoing() && get_remaining_time() != 0)
-        prepare_time_string(get_remaining_time(), 'R'); }
+        prepare_time_string(get_remaining_time()); }
   #endif
   #if ENABLED(SHOW_INTERACTION_TIME)
     void MarlinUI::drawInter() {

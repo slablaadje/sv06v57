@@ -60,7 +60,7 @@ void GcodeSuite::M145() {
   }
 }
 
-void GcodeSuite::M145_report(const bool forReplay/*=true*/) {
+/* void GcodeSuite::M145_report(const bool forReplay=true) {
   report_heading(forReplay, F(STR_MATERIAL_HEATUP));
   LOOP_L_N(i, PREHEAT_COUNT) {
     report_echo_start(forReplay);
@@ -77,6 +77,6 @@ void GcodeSuite::M145_report(const bool forReplay/*=true*/) {
       #endif
     );
   }
-}
+} */
 
 #endif // HAS_PREHEAT

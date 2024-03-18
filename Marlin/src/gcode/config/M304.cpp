@@ -35,19 +35,22 @@
  *  D<dval> - Set the D value
  */
 void GcodeSuite::M304() {
-  if (!parser.seen("PID")) return M304_report();
+  if (!parser.seen("PID"))
+    return;
+    //return M304_report();
+
   if (parser.seenval('P')) thermalManager.temp_bed.pid.set_Kp(parser.value_float());
   if (parser.seenval('I')) thermalManager.temp_bed.pid.set_Ki(parser.value_float());
   if (parser.seenval('D')) thermalManager.temp_bed.pid.set_Kd(parser.value_float());
 }
 
-void GcodeSuite::M304_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M304_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F(STR_BED_PID));
   SERIAL_ECHOLNPGM("  M304"
       " P", thermalManager.temp_bed.pid.p()
     , " I", thermalManager.temp_bed.pid.i()
     , " D", thermalManager.temp_bed.pid.d()
   );
-}
+}*/
 
 #endif // PIDTEMPBED

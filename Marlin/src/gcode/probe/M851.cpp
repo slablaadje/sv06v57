@@ -33,7 +33,9 @@
  */
 void GcodeSuite::M851() {
   // No parameters? Show current state.
-  if (!parser.seen("XYZ")) return M851_report();
+  if (!parser.seen("XYZ"))
+    return;
+    //return M851_report();
 
   // Start with current offsets and modify
   xyz_pos_t offs = probe.offset;
@@ -83,7 +85,7 @@ void GcodeSuite::M851() {
   if (ok) probe.offset = offs;
 }
 
-void GcodeSuite::M851_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M851_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F(STR_Z_PROBE_OFFSET));
   SERIAL_ECHOPGM_P(
     #if HAS_PROBE_XY_OFFSET
@@ -97,6 +99,6 @@ void GcodeSuite::M851_report(const bool forReplay/*=true*/) {
     , PSTR(" ;")
   );
   say_units();
-}
+}*/
 
 #endif // HAS_BED_PROBE

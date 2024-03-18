@@ -66,7 +66,7 @@ void GcodeSuite::M412() {
   }
 }
 
-void GcodeSuite::M412_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M412_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F(STR_FILAMENT_RUNOUT_SENSOR));
   SERIAL_ECHOPGM(
     "  M412 S", runout.enabled
@@ -76,6 +76,6 @@ void GcodeSuite::M412_report(const bool forReplay/*=true*/) {
     , " ; Sensor "
   );
   serialprintln_onoff(runout.enabled);
-}
+}*/
 
 #endif // HAS_FILAMENT_SENSOR

@@ -27,7 +27,7 @@
 #include "../../gcode.h"
 #include "../../../module/stepper.h"
 
-void GcodeSuite::M593_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M593_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F("Input Shaping"));
   #if ENABLED(INPUT_SHAPING_X)
     SERIAL_ECHOLNPGM("  M593 X"
@@ -42,7 +42,7 @@ void GcodeSuite::M593_report(const bool forReplay/*=true*/) {
       " D", stepper.get_shaping_damping_ratio(Y_AXIS)
     );
   #endif
-}
+}*/
 
 /**
  * M593: Get or Set Input Shaping Parameters
@@ -53,7 +53,9 @@ void GcodeSuite::M593_report(const bool forReplay/*=true*/) {
  *  Y            Set the given parameters only for the Y axis.
  */
 void GcodeSuite::M593() {
-  if (!parser.seen_any()) return M593_report();
+  if (!parser.seen_any())
+    return;
+    //return M593_report();
 
   const bool seen_X = TERN0(INPUT_SHAPING_X, parser.seen_test('X')),
              seen_Y = TERN0(INPUT_SHAPING_Y, parser.seen_test('Y')),

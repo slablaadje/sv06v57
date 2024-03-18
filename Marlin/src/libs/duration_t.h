@@ -163,11 +163,6 @@ struct duration_t {
       sprintf_P(buffer, PSTR("%hud %02hu:%02hu"), d, h % 24, m);  // 1d 23:45
       return strlen_P(buffer);
     }
-    else if (!h) {
-      const uint16_t s = uint16_t(this->second() % 60UL);
-      sprintf_P(buffer, PSTR("%02hu'%02hu"), m, s);     // 12'34
-      return 5;
-    }
     else if (h < 100) {
       sprintf_P(buffer, PSTR("%02hu:%02hu"), h, m);     // 12:34
       return 5;

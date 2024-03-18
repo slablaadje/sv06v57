@@ -123,7 +123,8 @@
  */
 void GcodeSuite::M201() {
   if (!parser.seen("T" STR_AXES_LOGICAL TERN_(XY_FREQUENCY_LIMIT, "FS")))
-    return M201_report();
+    return;
+    //return M201_report();
 
   const int8_t target_extruder = get_target_extruder_from_command();
   if (target_extruder < 0) return;
@@ -141,7 +142,7 @@ void GcodeSuite::M201() {
   }
 }
 
-void GcodeSuite::M201_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M201_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F(STR_MAX_ACCELERATION));
   SERIAL_ECHOLNPGM_P(
     LIST_N(DOUBLE(NUM_AXES),
@@ -168,7 +169,7 @@ void GcodeSuite::M201_report(const bool forReplay/*=true*/) {
       );
     }
   #endif
-}
+}*/
 
 /**
  * M203: Set maximum feedrate that your machine can sustain (M203 X200 Y200 Z300 E10000) in units/sec
@@ -177,7 +178,8 @@ void GcodeSuite::M201_report(const bool forReplay/*=true*/) {
  */
 void GcodeSuite::M203() {
   if (!parser.seen("T" STR_AXES_LOGICAL))
-    return M203_report();
+    return;
+    //return M203_report();
 
   const int8_t target_extruder = get_target_extruder_from_command();
   if (target_extruder < 0) return;
@@ -189,7 +191,7 @@ void GcodeSuite::M203() {
     }
 }
 
-void GcodeSuite::M203_report(const bool forReplay/*=true*/) {
+/* void GcodeSuite::M203_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F(STR_MAX_FEEDRATES));
   SERIAL_ECHOLNPGM_P(
     LIST_N(DOUBLE(NUM_AXES),
@@ -216,7 +218,7 @@ void GcodeSuite::M203_report(const bool forReplay/*=true*/) {
       );
     }
   #endif
-}
+}*/
 
 /**
  * M204: Set Accelerations in units/sec^2 (M204 P1200 R3000 T3000)
@@ -227,7 +229,8 @@ void GcodeSuite::M203_report(const bool forReplay/*=true*/) {
  */
 void GcodeSuite::M204() {
   if (!parser.seen("PRST"))
-    return M204_report();
+    return;
+    //return M204_report();
   else {
     //planner.synchronize();
     // 'S' for legacy compatibility. Should NOT BE USED for new development
@@ -238,14 +241,14 @@ void GcodeSuite::M204() {
   }
 }
 
-void GcodeSuite::M204_report(const bool forReplay/*=true*/) {
+/* void GcodeSuite::M204_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F(STR_ACCELERATION_P_R_T));
   SERIAL_ECHOLNPGM_P(
       PSTR("  M204 P"), LINEAR_UNIT(planner.settings.acceleration)
     , PSTR(" R"), LINEAR_UNIT(planner.settings.retract_acceleration)
     , SP_T_STR, LINEAR_UNIT(planner.settings.travel_acceleration)
   );
-}
+} */
 
 #if AXIS_COLLISION('B')
   #define M205_MIN_SEG_TIME_PARAM 'D'
@@ -274,7 +277,9 @@ void GcodeSuite::M204_report(const bool forReplay/*=true*/) {
  *    J(mm)          : Junction Deviation
  */
 void GcodeSuite::M205() {
-  if (!parser.seen_any()) return M205_report();
+  if (!parser.seen_any())
+    return;
+    //return M205_report();
 
   //planner.synchronize();
   if (parser.seenval(M205_MIN_SEG_TIME_PARAM)) planner.settings.min_segment_time_us = parser.value_ulong();
@@ -315,7 +320,7 @@ void GcodeSuite::M205() {
   #endif // HAS_CLASSIC_JERK
 }
 
-void GcodeSuite::M205_report(const bool forReplay/*=true*/) {
+/* void GcodeSuite::M205_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F(
     "Advanced (" M205_MIN_SEG_TIME_STR "<min_segment_time_us> S<min_feedrate> T<min_travel_feedrate>"
     TERN_(HAS_JUNCTION_DEVIATION, " J<junc_dev>")
@@ -353,4 +358,4 @@ void GcodeSuite::M205_report(const bool forReplay/*=true*/) {
       #endif
     #endif
   );
-}
+}*/

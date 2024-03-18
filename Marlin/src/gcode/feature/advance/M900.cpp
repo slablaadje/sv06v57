@@ -144,7 +144,7 @@ void GcodeSuite::M900() {
 
 }
 
-void GcodeSuite::M900_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M900_report(const bool forReplay=true) {
   report_heading(forReplay, F(STR_LINEAR_ADVANCE));
   #if DISTINCT_E < 2
     report_echo_start(forReplay);
@@ -155,6 +155,6 @@ void GcodeSuite::M900_report(const bool forReplay/*=true*/) {
       SERIAL_ECHOLNPGM("  M900 T", e, " K", planner.extruder_advance_K[e]);
     }
   #endif
-}
+}*/
 
 #endif // LIN_ADVANCE

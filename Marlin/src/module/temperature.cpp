@@ -2029,7 +2029,7 @@ void Temperature::task() {
     COPY(user_thermistor, default_user_thermistor);
   }
 
-  void Temperature::M305_report(const uint8_t t_index, const bool forReplay/*=true*/) {
+  /*void Temperature::M305_report(const uint8_t t_index, const bool forReplay=true) {
     gcode.report_heading_etc(forReplay, F(STR_USER_THERMISTORS));
     SERIAL_ECHOPGM("  M305 P", AS_DIGIT(t_index));
 
@@ -2058,7 +2058,7 @@ void Temperature::task() {
       nullptr
     );
     SERIAL_EOL();
-  }
+  }*/
 
   celsius_float_t Temperature::user_thermistor_to_deg_c(const uint8_t t_index, const raw_adc_t raw) {
 

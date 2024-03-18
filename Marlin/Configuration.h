@@ -38,6 +38,72 @@
 #define CONFIGURATION_H_VERSION 02010300
 
 //===========================================================================
+//========================== KnightShade settings ===========================
+//===========================================================================
+
+// NOZZLE_TO_PROBE_OFFSET
+
+#define KS_MARLIN_TITLE                 "Marlin ~~ )»<(((°>-"
+#define KS_CUSTOM_MACHINE_NAME          "SV06 KS"
+#define KS_SHORT_BUILD_VERSION          "2.1.2.57.5"
+
+// Physical
+#define KS_X_BED_SIZE                   222
+#define KS_Y_BED_SIZE                   224
+#define KS_Z_MAX_POS                    250
+#define KS_X_MIN_POS                    -2
+#define KS_Y_MIN_POS                    -5
+
+// Leveling
+#define KS_GRID_POINTS_PER_AXIS         8
+
+// Motion
+#define KS_DEFAULT_MAX_ACCELERATION     { 1500, 1500, 100, 5000 } // Axes
+#define KS_DEFAULT_ACCELERATION         1500    // For printing moves
+#define KS_DEFAULT_RETRACT_ACCELERATION 1500    // E acceleration for retracts
+#define KS_DEFAULT_TRAVEL_ACCELERATION  1500    // X, Y, Z acceleration for travel (non printing) moves
+#define KS_XY_PROBE_FEEDRATE            (80*60) // mm/min (feedrates are in mm/min by default)
+#define KS_HOMING_FEEDRATE_MM_MIN       { (50*60), (50*60), (4*60) }
+#define KS_SHAPING_FREQ_X               36.4
+#define KS_SHAPING_ZETA_X               0.18f
+#define KS_SHAPING_FREQ_Y               39.5
+#define KS_SHAPING_ZETA_Y               0.12f
+
+// Stepper Motors
+#define KS_MOTOR_STEPS_PER_UNIT         { 80, 80, 800, 691.5 }
+#define KS_MOTOR_HOLD_MULTIPLIER        1
+#define KS_MOTOR_XY_HOLD_MULTIPLIER     0.8
+#define KS_MOTOR_XY_RUN_CURRENT         675
+#define KS_MOTOR_XY_HOME_CURRENT        320
+#define KS_MOTOR_XY_RSENSE              0.21
+
+#define KS_MOTOR_Z_RUN_CURRENT          900
+#define KS_MOTOR_Z_HOME_CURRENT         900
+#define KS_MOTOR_Z_HOLD_MULTIPLIER      0.66
+#define KS_MOTOR_Z_RSENSE               0.15
+
+#define KS_MOTOR_E_RUN_CURRENT          550
+#define KS_MOTOR_E_HOLD_MULTIPLIER      0.7
+#define KS_MOTOR_E_RSENSE               0.15
+
+#define KS_X_STALL_SENSITIVITY          68
+#define KS_Y_STALL_SENSITIVITY          62
+
+// PID
+#define KS_PID_FUNCTIONAL_RANGE         22    // Default 10
+#define KS_BANG_MAX                     230   // Limits current to nozzle while in bang-bang mode; 255=full current
+#define KS_PID_MAX                      200   // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define KS_PID_K1                       0.95  // Smoothing, don't get this one
+#define KS_MAX_BED_POWER                255   // 0-255
+
+#define KS_DEFAULT_Kp                   20.9
+#define KS_DEFAULT_Ki                   2.53
+#define KS_DEFAULT_Kd                   43.1
+#define KS_DEFAULT_bedKp                153.9
+#define KS_DEFAULT_bedKi                24
+#define KS_DEFAULT_bedKd                657.6
+
+//===========================================================================
 //============================= Getting Started =============================
 //===========================================================================
 
@@ -78,14 +144,14 @@
 #define SHOW_BOOTSCREEN
 
 // Show the bitmap in Marlin/_Bootscreen.h on startup.
-#define SHOW_CUSTOM_BOOTSCREEN
+//#define SHOW_CUSTOM_BOOTSCREEN
 
 // Show the bitmap in Marlin/_Statusscreen.h on the status screen.
-#define CUSTOM_STATUS_SCREEN_IMAGE
+//#define CUSTOM_STATUS_SCREEN_IMAGE
 
-#define SHORT_BUILD_VERSION      "2.1.2v57"
-#define STRING_DISTRIBUTION_DATE "2023-02-11"
-#define WEBSITE_URL              "techdungeon.xyz"
+#define SHORT_BUILD_VERSION      KS_SHORT_BUILD_VERSION
+#define STRING_DISTRIBUTION_DATE "2024-03-15"
+#define WEBSITE_URL              "no"
 
 // @section machine
 
@@ -139,7 +205,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Sovol SV06"
+#define CUSTOM_MACHINE_NAME KS_CUSTOM_MACHINE_NAME
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -655,9 +721,9 @@
 #define PIDTEMP          // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
 //#define MPCTEMP        // ** EXPERIMENTAL **
 
-#define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
-#define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
-#define PID_K1 0.95      // Smoothing factor within any PID loop
+#define BANG_MAX KS_BANG_MAX     // Limits current to nozzle while in bang-bang mode; 255=full current
+#define PID_MAX KS_PID_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define PID_K1 KS_PID_K1      // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
   //#define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to toggle activation.
@@ -671,9 +737,9 @@
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST { 76.55, 76.55 }
   #else
-    #define DEFAULT_Kp  15.95
-    #define DEFAULT_Ki   1.30
-    #define DEFAULT_Kd  48.96
+    #define DEFAULT_Kp  KS_DEFAULT_Kp
+    #define DEFAULT_Ki  KS_DEFAULT_Ki
+    #define DEFAULT_Kd  KS_DEFAULT_Kd
   #endif
 #endif
 
@@ -748,7 +814,7 @@
  * When set to any value below 255, enables a form of PWM to the bed that acts like a divider
  * so don't use it unless you are OK with PWM on your bed. (See the comment on enabling PIDTEMPBED)
  */
-#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER KS_MAX_BED_POWER // limits duty cycle to bed; 255=full current
 
 #if ENABLED(PIDTEMPBED)
   //#define MIN_BED_POWER 0
@@ -756,9 +822,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 110.38
-  #define DEFAULT_bedKi 6.12
-  #define DEFAULT_bedKd 497.3
+  #define DEFAULT_bedKp KS_DEFAULT_bedKp
+  #define DEFAULT_bedKi KS_DEFAULT_bedKi
+  #define DEFAULT_bedKd KS_DEFAULT_bedKd
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -811,7 +877,7 @@
 #if ANY(PIDTEMP, PIDTEMPBED, PIDTEMPCHAMBER)
   //#define PID_OPENLOOP          // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
-  #define PID_FUNCTIONAL_RANGE 10 // If the temperature difference between the target temperature and the actual temperature
+  #define PID_FUNCTIONAL_RANGE KS_PID_FUNCTIONAL_RANGE // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
   #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of flash)
@@ -1226,7 +1292,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 691.5}
+#define DEFAULT_AXIS_STEPS_PER_UNIT   KS_MOTOR_STEPS_PER_UNIT
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -1246,7 +1312,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 500, 500, 100, 5000 }
+#define DEFAULT_MAX_ACCELERATION      KS_DEFAULT_MAX_ACCELERATION
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1261,9 +1327,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  500    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          KS_DEFAULT_ACCELERATION    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  KS_DEFAULT_RETRACT_ACCELERATION    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   KS_DEFAULT_TRAVEL_ACCELERATION    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -1548,7 +1614,7 @@
 //#define PROBING_MARGIN 10
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (40*60)
+#define XY_PROBE_FEEDRATE KS_XY_PROBE_FEEDRATE
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST (4*60) 
@@ -1630,7 +1696,7 @@
 #define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
-#define Z_MIN_PROBE_REPEATABILITY_TEST
+//#define Z_MIN_PROBE_REPEATABILITY_TEST
 
 // Before deploy/stow pause for user confirmation
 //#define PAUSE_BEFORE_DEPLOY_STOW
@@ -1658,7 +1724,7 @@
 // Require minimum nozzle and/or bed temperature for probing
 //#define PREHEAT_BEFORE_PROBING
 #if ENABLED(PREHEAT_BEFORE_PROBING)
-  #define PROBING_NOZZLE_TEMP 150   // (°C) Only applies to E0 at this time
+  #define PROBING_NOZZLE_TEMP 140   // (°C) Only applies to E0 at this time
   #define PROBING_BED_TEMP     60
 #endif
 
@@ -1752,16 +1818,16 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 220
-#define Y_BED_SIZE 220
+#define X_BED_SIZE KS_X_BED_SIZE
+#define Y_BED_SIZE KS_Y_BED_SIZE
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS -3
-#define Y_MIN_POS -5
+#define X_MIN_POS KS_X_MIN_POS
+#define Y_MIN_POS KS_Y_MIN_POS
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 250
+#define Z_MAX_POS KS_Z_MAX_POS
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -1931,8 +1997,8 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#define AUTO_BED_LEVELING_BILINEAR
-//#define AUTO_BED_LEVELING_UBL
+//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
 /**
@@ -1948,7 +2014,7 @@
  */
 #define PREHEAT_BEFORE_LEVELING
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
-  #define LEVELING_NOZZLE_TEMP 150   // (°C) Only applies to E0 at this time
+  #define LEVELING_NOZZLE_TEMP 140   // (°C) Only applies to E0 at this time
   #define LEVELING_BED_TEMP     60
 #endif
 
@@ -1966,7 +2032,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-#define DEBUG_LEVELING_FEATURE
+//#define DEBUG_LEVELING_FEATURE
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
   // Set a height for the start of manual adjustment
@@ -2044,8 +2110,8 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
-  #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
+  #define GRID_MAX_POINTS_X KS_GRID_POINTS_PER_AXIS      // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_Y KS_GRID_POINTS_PER_AXIS
 
   //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
 
@@ -2156,7 +2222,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (40*60), (40*60), (4*60) }
+#define HOMING_FEEDRATE_MM_M KS_HOMING_FEEDRATE_MM_MIN
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -2235,8 +2301,8 @@
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
 #define EEPROM_SETTINGS     // Persistent storage with M500 and M501
-//#define DISABLE_M503        // Saves ~2700 bytes of flash. Disable for release!
-#define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
+#define DISABLE_M503        // Saves ~2700 bytes of flash. Disable for release!
+//#define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
   #define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
@@ -2278,21 +2344,21 @@
 #define PREHEAT_1_TEMP_CHAMBER 35
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL       "PETG"
-#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    70
+#define PREHEAT_2_LABEL       "Cooldown"
+#define PREHEAT_2_TEMP_HOTEND 0
+#define PREHEAT_2_TEMP_BED     60
 #define PREHEAT_2_TEMP_CHAMBER 35
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
-#define PREHEAT_3_LABEL       "TPU"
-#define PREHEAT_3_TEMP_HOTEND 205
-#define PREHEAT_3_TEMP_BED     45
+#define PREHEAT_3_LABEL       "Bed 60"
+#define PREHEAT_3_TEMP_HOTEND 0
+#define PREHEAT_3_TEMP_BED     60
 #define PREHEAT_3_TEMP_CHAMBER 35
 #define PREHEAT_3_FAN_SPEED     0 // Value from 0 to 255
 
-#define PREHEAT_4_LABEL       "ABS"
-#define PREHEAT_4_TEMP_HOTEND 260
-#define PREHEAT_4_TEMP_BED     70
+#define PREHEAT_4_LABEL       "PETG"
+#define PREHEAT_4_TEMP_HOTEND 240
+#define PREHEAT_4_TEMP_BED    70
 #define PREHEAT_4_TEMP_CHAMBER 35
 #define PREHEAT_4_FAN_SPEED     0 // Value from 0 to 255
 

@@ -38,7 +38,9 @@
  * ***              In the 2.0 release, it will simply be disabled by default.
  */
 void GcodeSuite::M206() {
-  if (!parser.seen_any()) return M206_report();
+  if (!parser.seen_any()) 
+    return;
+    //return M206_report();
   LOOP_NUM_AXES(a)
     if (parser.seenval(AXIS_CHAR(a))) set_home_offset((AxisEnum)a, parser.value_axis_units((AxisEnum)a));
   #if ENABLED(MORGAN_SCARA)
@@ -49,7 +51,7 @@ void GcodeSuite::M206() {
   report_current_position();
 }
 
-void GcodeSuite::M206_report(const bool forReplay/*=true*/) {
+/* void GcodeSuite::M206_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F(STR_HOME_OFFSET));
   SERIAL_ECHOLNPGM_P(
     #if IS_CARTESIAN
@@ -68,7 +70,7 @@ void GcodeSuite::M206_report(const bool forReplay/*=true*/) {
       PSTR("  M206 Z"), LINEAR_UNIT(home_offset.z)
     #endif
   );
-}
+}*/
 
 /**
  * M428: Set home_offset based on the distance between the

@@ -433,7 +433,8 @@ public:
         #ifndef BOOTSCREEN_TIMEOUT
           #define BOOTSCREEN_TIMEOUT 2500
         #endif
-        static void draw_marlin_bootscreen(const bool line2=false);
+        //static void draw_marlin_bootscreen(const bool line2=false);
+        static void draw_marlin_bootscreen();
         static void show_marlin_bootscreen();
         static void show_bootscreen();
         static void bootscreen_completion(const millis_t sofar);

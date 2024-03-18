@@ -156,28 +156,16 @@ void _menu_move_distance(const AxisEnum axis, const screenFunc_t func, const int
   }
 
   BACK_ITEM(MSG_MOVE_AXIS);
-  if (parser.using_inch_units()) {
-    if (HAS_LARGE_MOVES) {
-      SUBMENU(MSG_MOVE_1IN, []{ _goto_manual_move(IN_TO_MM(1.000f)); });
-      SUBMENU(MSG_MOVE_05IN, []{ _goto_manual_move(IN_TO_MM(0.500f)); });
-    }
-    SUBMENU(MSG_MOVE_01IN,   []{ _goto_manual_move(IN_TO_MM(0.100f)); });
-    SUBMENU(MSG_MOVE_001IN,  []{ _goto_manual_move(IN_TO_MM(0.010f)); });
-    SUBMENU(MSG_MOVE_0001IN, []{ _goto_manual_move(IN_TO_MM(0.001f)); });
-  }
-  else {
-    if (HAS_LARGE_MOVES) {
-      SUBMENU(MSG_MOVE_100MM, []{ _goto_manual_move(100); });
-      SUBMENU(MSG_MOVE_50MM, []{ _goto_manual_move(50); });
-    }
-    SUBMENU(MSG_MOVE_10MM, []{ _goto_manual_move(10);    });
-    SUBMENU(MSG_MOVE_1MM,  []{ _goto_manual_move( 1);    });
-    SUBMENU(MSG_MOVE_01MM, []{ _goto_manual_move( 0.1f); });
-    #if HAS_Z_AXIS
-      if (axis == Z_AXIS && (FINE_MANUAL_MOVE) > 0.0f && (FINE_MANUAL_MOVE) < 0.1f)
-        SUBMENU_f(F(STRINGIFY(FINE_MANUAL_MOVE)), MSG_MOVE_N_MM, []{ _goto_manual_move(float(FINE_MANUAL_MOVE)); });
-    #endif
-  }
+
+  SUBMENU(MSG_MOVE_10MM, []{ _goto_manual_move(10);    });
+  SUBMENU(MSG_MOVE_1MM,  []{ _goto_manual_move( 1);    });
+  SUBMENU(MSG_MOVE_01MM, []{ _goto_manual_move( 0.1f); });
+  SUBMENU(MSG_MOVE_180MM, []{ _goto_manual_move(180);    });
+  #if HAS_Z_AXIS
+    if (axis == Z_AXIS && (FINE_MANUAL_MOVE) > 0.0f && (FINE_MANUAL_MOVE) < 0.1f)
+      SUBMENU_f(F(STRINGIFY(FINE_MANUAL_MOVE)), MSG_MOVE_N_MM, []{ _goto_manual_move(float(FINE_MANUAL_MOVE)); });
+  #endif
+
   END_MENU();
 }
 

@@ -151,7 +151,7 @@ void GcodeSuite::M569() {
     say_stealth_status();
 }
 
-void GcodeSuite::M569_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M569_report(const bool forReplay=true) {
   report_heading(forReplay, F(STR_DRIVER_STEPPING_MODE));
 
   auto say_M569 = [](const bool forReplay, FSTR_P const etc=nullptr, const bool eol=false) {
@@ -234,6 +234,6 @@ void GcodeSuite::M569_report(const bool forReplay/*=true*/) {
   if (TERN0(E5_HAS_STEALTHCHOP, stepperE5.get_stored_stealthChop())) { say_M569(forReplay, F("T5 E"), true); }
   if (TERN0(E6_HAS_STEALTHCHOP, stepperE6.get_stored_stealthChop())) { say_M569(forReplay, F("T6 E"), true); }
   if (TERN0(E7_HAS_STEALTHCHOP, stepperE7.get_stored_stealthChop())) { say_M569(forReplay, F("T7 E"), true); }
-}
+}*/
 
 #endif // HAS_STEALTHCHOP

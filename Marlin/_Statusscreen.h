@@ -33,7 +33,7 @@
 //
 // Status Screen Logo bitmap
 //
-
+/*
 #define STATUS_LOGO_WIDTH       32
 
 const unsigned char status_logo_bmp[] PROGMEM = {
@@ -51,6 +51,8 @@ const unsigned char status_logo_bmp[] PROGMEM = {
   B00111100,B00001000,B00011100,B00111110
 };
 
+*/
+
 //
 // Use default bitmaps
 //
@@ -64,3 +66,4 @@ const unsigned char status_logo_bmp[] PROGMEM = {
   #define STATUS_HEATERS_X      40
   #define STATUS_BED_X          81
 #endif
+

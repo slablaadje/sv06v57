@@ -377,7 +377,7 @@
     }
   }
 
-  void GcodeSuite::M913_report(const bool forReplay/*=true*/) {
+  /*void GcodeSuite::M913_report(const bool forReplay=true) {
     report_heading(forReplay, F(STR_HYBRID_THRESHOLD));
 
     auto say_M913 = [](const bool forReplay) {
@@ -482,7 +482,7 @@
       SERIAL_ECHOLNPGM(" T7 E", stepperE7.get_pwm_thrs());
     #endif
     SERIAL_EOL();
-  }
+  }*/
 
 #endif // HYBRID_THRESHOLD
 
@@ -564,78 +564,7 @@
     }
   }
 
-  void GcodeSuite::M914_report(const bool forReplay/*=true*/) {
-    report_heading(forReplay, F(STR_STALLGUARD_THRESHOLD));
-
-    auto say_M914 = [](const bool forReplay) {
-      report_echo_start(forReplay);
-      SERIAL_ECHOPGM("  M914");
-    };
-
-    #if X_SENSORLESS || Y_SENSORLESS || Z_SENSORLESS
-      say_M914(forReplay);
-      #if X_SENSORLESS
-        SERIAL_ECHOPGM_P(SP_X_STR, stepperX.homing_threshold());
-      #endif
-      #if Y_SENSORLESS
-        SERIAL_ECHOPGM_P(SP_Y_STR, stepperY.homing_threshold());
-      #endif
-      #if Z_SENSORLESS
-        SERIAL_ECHOPGM_P(SP_Z_STR, stepperZ.homing_threshold());
-      #endif
-      SERIAL_EOL();
-    #endif
-
-    #if X2_SENSORLESS || Y2_SENSORLESS || Z2_SENSORLESS
-      say_M914(forReplay);
-      SERIAL_ECHOPGM(" I2");
-      #if X2_SENSORLESS
-        SERIAL_ECHOPGM_P(SP_X_STR, stepperX2.homing_threshold());
-      #endif
-      #if Y2_SENSORLESS
-        SERIAL_ECHOPGM_P(SP_Y_STR, stepperY2.homing_threshold());
-      #endif
-      #if Z2_SENSORLESS
-        SERIAL_ECHOPGM_P(SP_Z_STR, stepperZ2.homing_threshold());
-      #endif
-      SERIAL_EOL();
-    #endif
-
-    #if Z3_SENSORLESS
-      say_M914(forReplay);
-      SERIAL_ECHOLNPGM(" I3 Z", stepperZ3.homing_threshold());
-    #endif
-
-    #if Z4_SENSORLESS
-      say_M914(forReplay);
-      SERIAL_ECHOLNPGM(" I4 Z", stepperZ4.homing_threshold());
-    #endif
-
-    #if I_SENSORLESS
-      say_M914(forReplay);
-      SERIAL_ECHOLNPGM_P(SP_I_STR, stepperI.homing_threshold());
-    #endif
-    #if J_SENSORLESS
-      say_M914(forReplay);
-      SERIAL_ECHOLNPGM_P(SP_J_STR, stepperJ.homing_threshold());
-    #endif
-    #if K_SENSORLESS
-      say_M914(forReplay);
-      SERIAL_ECHOLNPGM_P(SP_K_STR, stepperK.homing_threshold());
-    #endif
-    #if U_SENSORLESS
-      say_M914(forReplay);
-      SERIAL_ECHOLNPGM_P(SP_U_STR, stepperU.homing_threshold());
-    #endif
-    #if V_SENSORLESS
-      say_M914(forReplay);
-      SERIAL_ECHOLNPGM_P(SP_V_STR, stepperV.homing_threshold());
-    #endif
-    #if W_SENSORLESS
-      say_M914(forReplay);
-      SERIAL_ECHOLNPGM_P(SP_W_STR, stepperW.homing_threshold());
-    #endif
-  }
+  // M914 knip
 
 #endif // USE_SENSORLESS
 

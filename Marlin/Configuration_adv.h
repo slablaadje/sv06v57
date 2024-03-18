@@ -447,7 +447,7 @@
  * Enable Autotemp Mode with M104/M109 F<factor> S<mintemp> B<maxtemp>.
  * Disable by sending M104/M109 with no F parameter (or F0 with AUTOTEMP_PROPORTIONAL).
  */
-#define AUTOTEMP
+//#define AUTOTEMP
 #if ENABLED(AUTOTEMP)
   #define AUTOTEMP_OLDWEIGHT    0.98  // Factor used to weight previous readings (0.0 < value < 1.0)
   #define AUTOTEMP_MIN          210
@@ -1031,7 +1031,7 @@
 //
 // Add the G35 command to read bed corners to help adjust screws. Requires a bed probe.
 //
-#define ASSISTED_TRAMMING
+//#define ASSISTED_TRAMMING
 #if ENABLED(ASSISTED_TRAMMING)
 
   // Define positions for probe points.
@@ -1089,12 +1089,12 @@
 #define INPUT_SHAPING_Y
 #if EITHER(INPUT_SHAPING_X, INPUT_SHAPING_Y)
   #if ENABLED(INPUT_SHAPING_X)
-    #define SHAPING_FREQ_X  40          // (Hz) The default dominant resonant frequency on the X axis.
-    #define SHAPING_ZETA_X  0.15f       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
+    #define SHAPING_FREQ_X  KS_SHAPING_FREQ_X          // (Hz) The default dominant resonant frequency on the X axis.
+    #define SHAPING_ZETA_X  KS_SHAPING_ZETA_X       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Y)
-    #define SHAPING_FREQ_Y  40          // (Hz) The default dominant resonant frequency on the Y axis.
-    #define SHAPING_ZETA_Y  0.15f       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
+    #define SHAPING_FREQ_Y  KS_SHAPING_FREQ_Y          // (Hz) The default dominant resonant frequency on the Y axis.
+    #define SHAPING_ZETA_Y  KS_SHAPING_ZETA_Y       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   //#define SHAPING_MIN_FREQ  20        // By default the minimum of the shaping frequencies. Override to affect SRAM usage.
   //#define SHAPING_MAX_STEPRATE 10000  // By default the maximum total step rate of the shaped axes. Override to affect SRAM usage.
@@ -1360,7 +1360,7 @@
 #endif
 
 // Change values more rapidly when the encoder is rotated faster
-#define ENCODER_RATE_MULTIPLIER
+//#define ENCODER_RATE_MULTIPLIER
 #if ENABLED(ENCODER_RATE_MULTIPLIER)
   #define ENCODER_10X_STEPS_PER_SEC   30  // (steps/s) Encoder rate for 10x speed
   #define ENCODER_100X_STEPS_PER_SEC  80  // (steps/s) Encoder rate for 100x speed
@@ -1397,7 +1397,7 @@
 
   #if HAS_BED_PROBE
     // Add calibration in the Probe Offsets menu to compensate for X-axis twist.
-    #define X_AXIS_TWIST_COMPENSATION
+    //#define X_AXIS_TWIST_COMPENSATION
     #if ENABLED(X_AXIS_TWIST_COMPENSATION)
       /**
        * Enable to init the Probe Z-Offset when starting the Wizard.
@@ -1422,7 +1422,7 @@
   #endif
 
   // Add 50/100mm moves to MarlinUI even with a smaller bed
-  //#define LARGE_MOVE_ITEMS
+  #define LARGE_MOVE_ITEMS
 
   // BACK menu items keep the highlight at the top
   #define TURBO_BACK_MENU_ITEM
@@ -1440,7 +1440,7 @@
   //#define LCD_TIMEOUT_TO_STATUS 15000   // (ms)
 
   #if ENABLED(SHOW_BOOTSCREEN)
-    #define BOOTSCREEN_TIMEOUT 4000       // (ms) Total Duration to display the boot screen(s)
+    #define BOOTSCREEN_TIMEOUT 2500       // (ms) Total Duration to display the boot screen(s)
     #if EITHER(HAS_MARLINUI_U8GLIB, TFT_COLOR_UI)
       #define BOOT_MARLIN_LOGO_SMALL      // Show a smaller Marlin logo on the Boot Screen (saving lots of flash)
     #endif
@@ -1500,8 +1500,8 @@
 
 // LCD Print Progress options. Multiple times may be displayed in turn.
 #if HAS_DISPLAY && EITHER(SDSUPPORT, SET_PROGRESS_MANUALLY)
-  #define SHOW_PROGRESS_PERCENT           // Show print progress percentage (doesn't affect progress bar)
-  #define SHOW_ELAPSED_TIME               // Display elapsed printing time (prefix 'E')
+  //#define SHOW_PROGRESS_PERCENT           // Show print progress percentage (doesn't affect progress bar)
+  //#define SHOW_ELAPSED_TIME               // Display elapsed printing time (prefix 'E')
   #define SHOW_REMAINING_TIME           // Display estimated time to completion (prefix 'R')
   #if ENABLED(SET_INTERACTION_TIME)
     #define SHOW_INTERACTION_TIME         // Display time until next user interaction ('C' = filament change)
@@ -1537,7 +1537,7 @@
   //#define SD_DETECT_STATE HIGH
 
   //#define SD_IGNORE_AT_STARTUP            // Don't mount the SD card when starting up
-  //#define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
+  #define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
 
   //#define GCODE_REPEAT_MARKERS            // Enable G-code M808 to set repeat markers and do looping
 
@@ -1548,7 +1548,7 @@
 
   // Reverse SD sort to show "more recent" files first, according to the card's FAT.
   // Since the FAT gets out of order with usage, SDCARD_SORT_ALPHA is recommended.
-  //#define SDCARD_RATHERRECENTFIRST
+  #define SDCARD_RATHERRECENTFIRST
 
   #define SD_MENU_CONFIRM_START             // Confirm the selected SD file before printing
 
@@ -1573,7 +1573,7 @@
    * an option on the LCD screen to continue the print from the last-known
    * point in the file.
    */
-  #define POWER_LOSS_RECOVERY
+  //#define POWER_LOSS_RECOVERY
   #if ENABLED(POWER_LOSS_RECOVERY)
     #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
     //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
@@ -1619,7 +1619,7 @@
    *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
    *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
    */
-  #define SDCARD_SORT_ALPHA
+  //#define SDCARD_SORT_ALPHA
 
   // SD Card Sorting options
   #if ENABLED(SDCARD_SORT_ALPHA)
@@ -1837,7 +1837,7 @@
   #define STATUS_HOTEND_INVERTED      // Show solid nozzle bitmaps when heating (Requires STATUS_HOTEND_ANIM for numbered hotends)
   #define STATUS_HOTEND_ANIM          // Use a second bitmap to indicate hotend heating
   #define STATUS_BED_ANIM             // Use a second bitmap to indicate bed heating
-  #define STATUS_CHAMBER_ANIM         // Use a second bitmap to indicate chamber heating
+  //#define STATUS_CHAMBER_ANIM         // Use a second bitmap to indicate chamber heating
   //#define STATUS_CUTTER_ANIM        // Use a second bitmap to indicate spindle / laser active
   //#define STATUS_COOLER_ANIM        // Use a second bitmap to indicate laser cooling
   //#define STATUS_FLOWMETER_ANIM     // Use multiple bitmaps to indicate coolant flow
@@ -2288,7 +2288,7 @@
 //
 // G2/G3 Arc Support
 //
-#define ARC_SUPPORT                   // Requires ~3226 bytes
+//#define ARC_SUPPORT                   // Requires ~3226 bytes
 #if ENABLED(ARC_SUPPORT)
   #define MIN_ARC_SEGMENT_MM      0.1 // (mm) Minimum length of each arc segment
   #define MAX_ARC_SEGMENT_MM      1.0 // (mm) Maximum length of each arc segment
@@ -2715,7 +2715,7 @@
  */
 #if HAS_TRINAMIC_CONFIG || HAS_TMC26X
 
-  #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
+  #define HOLD_MULTIPLIER    KS_MOTOR_HOLD_MULTIPLIER  // Scales down the holding current from run current
 
   /**
    * Interpolate microsteps to 256
@@ -2724,13 +2724,13 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       860        // (mA) RMS current. Multiply by 1.414 for peak current.
-    #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
+    #define X_CURRENT       KS_MOTOR_XY_RUN_CURRENT        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT_HOME  KS_MOTOR_XY_HOME_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS     16        // 0..256
-    #define X_RSENSE          0.15     // Multiplied x1000 for TMC26X
+    #define X_RSENSE          KS_MOTOR_XY_RSENSE     // Multiplied x1000 for TMC26X
     #define X_CHAIN_POS      -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
     //#define X_INTERPOLATE  true      // Enable to override 'INTERPOLATE' for the X axis
-    //#define X_HOLD_MULTIPLIER 0.5    // Enable to override 'HOLD_MULTIPLIER' for the X axis
+    #define X_HOLD_MULTIPLIER KS_MOTOR_XY_HOLD_MULTIPLIER    // Enable to override 'HOLD_MULTIPLIER' for the X axis
   #endif
 
   #if AXIS_IS_TMC_CONFIG(X2)
@@ -2744,13 +2744,13 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       900
-    #define Y_CURRENT_HOME  Y_CURRENT
+    #define Y_CURRENT       KS_MOTOR_XY_RUN_CURRENT
+    #define Y_CURRENT_HOME  KS_MOTOR_XY_HOME_CURRENT
     #define Y_MICROSTEPS     16
-    #define Y_RSENSE          0.15
+    #define Y_RSENSE          KS_MOTOR_XY_RSENSE
     #define Y_CHAIN_POS      -1
     //#define Y_INTERPOLATE  true
-    //#define Y_HOLD_MULTIPLIER 0.5
+    #define Y_HOLD_MULTIPLIER KS_MOTOR_XY_HOLD_MULTIPLIER
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y2)
@@ -2764,13 +2764,13 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       1000
-    #define Z_CURRENT_HOME  Z_CURRENT
+    #define Z_CURRENT       KS_MOTOR_Z_RUN_CURRENT
+    #define Z_CURRENT_HOME  KS_MOTOR_Z_HOME_CURRENT
     #define Z_MICROSTEPS     16
-    #define Z_RSENSE          0.15
+    #define Z_RSENSE          KS_MOTOR_Z_RSENSE
     #define Z_CHAIN_POS      -1
     //#define Z_INTERPOLATE  true
-    //#define Z_HOLD_MULTIPLIER 0.5
+    #define Z_HOLD_MULTIPLIER KS_MOTOR_Z_HOLD_MULTIPLIER
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z2)
@@ -2864,12 +2864,12 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT      550
+    #define E0_CURRENT      KS_MOTOR_E_RUN_CURRENT
     #define E0_MICROSTEPS    16
-    #define E0_RSENSE         0.15
+    #define E0_RSENSE         KS_MOTOR_E_RSENSE
     #define E0_CHAIN_POS     -1
     //#define E0_INTERPOLATE true
-    //#define E0_HOLD_MULTIPLIER 0.5
+    #define E0_HOLD_MULTIPLIER KS_MOTOR_E_HOLD_MULTIPLIER
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E1)
@@ -3111,9 +3111,9 @@
    */
   #define HYBRID_THRESHOLD
 
-  #define X_HYBRID_THRESHOLD     180  // [mm/s]
+  #define X_HYBRID_THRESHOLD     185  // [mm/s]
   #define X2_HYBRID_THRESHOLD    150
-  #define Y_HYBRID_THRESHOLD     180
+  #define Y_HYBRID_THRESHOLD     185
   #define Y2_HYBRID_THRESHOLD    150
   #define Z_HYBRID_THRESHOLD      40
   #define Z2_HYBRID_THRESHOLD      3
@@ -3164,9 +3164,9 @@
 
   #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
-    #define X_STALL_SENSITIVITY 65
+    #define X_STALL_SENSITIVITY KS_X_STALL_SENSITIVITY
     #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-    #define Y_STALL_SENSITIVITY  68
+    #define Y_STALL_SENSITIVITY  KS_Y_STALL_SENSITIVITY
     #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
     //#define Z_STALL_SENSITIVITY  8
     //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
@@ -3206,7 +3206,7 @@
    * Enable M122 debugging command for TMC stepper drivers.
    * M122 S0/1 will enable continuous reporting.
    */
-  #define TMC_DEBUG
+  //#define TMC_DEBUG
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
@@ -3604,7 +3604,7 @@
 /**
  * Auto-report temperatures with M155 S<seconds>
  */
-#define AUTO_REPORT_TEMPERATURES
+//#define AUTO_REPORT_TEMPERATURES
 #if ENABLED(AUTO_REPORT_TEMPERATURES) && TEMP_SENSOR_REDUNDANT
   //#define AUTO_REPORT_REDUNDANT // Include the "R" sensor in the auto-report
 #endif
@@ -3612,7 +3612,7 @@
 /**
  * Auto-report position with M154 S<seconds>
  */
-#define AUTO_REPORT_POSITION
+//#define AUTO_REPORT_POSITION
 
 /**
  * Include capabilities in M115 output
@@ -3629,14 +3629,14 @@
  * Add the M16 G-code to compare a string to the MACHINE_NAME.
  * M16 with a non-matching string causes the printer to halt.
  */
-#define EXPECTED_PRINTER_CHECK
+//#define EXPECTED_PRINTER_CHECK
 
 // @section volumetrics
 
 /**
  * Disable all Volumetric extrusion options
  */
-//#define NO_VOLUMETRICS
+#define NO_VOLUMETRICS
 
 #if DISABLED(NO_VOLUMETRICS)
   /**
@@ -3852,7 +3852,7 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-#define HOST_ACTION_COMMANDS
+//#define HOST_ACTION_COMMANDS
 #if ENABLED(HOST_ACTION_COMMANDS)
   #define HOST_PAUSE_M76                // Tell the host to pause in response to M76
   #define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback
@@ -3870,7 +3870,7 @@
  *
  * Implement M486 to allow Marlin to skip objects
  */
-#define CANCEL_OBJECTS
+//#define CANCEL_OBJECTS
 #if ENABLED(CANCEL_OBJECTS)
   #define CANCEL_OBJECTS_REPORTING // Emit the current object as a status message
 #endif
@@ -3985,7 +3985,7 @@
  * Implemented as G34 because M915 is deprecated.
  * @section calibrate
  */
-#define MECHANICAL_GANTRY_CALIBRATION
+//#define MECHANICAL_GANTRY_CALIBRATION
 #if ENABLED(MECHANICAL_GANTRY_CALIBRATION)
   #define GANTRY_CALIBRATION_CURRENT          1100    // Default calibration current in ma
   #define GANTRY_CALIBRATION_EXTRA_HEIGHT      15     // Extra distance in mm past Z_###_POS to move
