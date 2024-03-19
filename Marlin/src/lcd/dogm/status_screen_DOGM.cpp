@@ -445,20 +445,24 @@ FORCE_INLINE void _draw_axis_value(const AxisEnum axis, const char *value, const
 // Prepare strings for progress display
 #if EITHER(HAS_EXTRA_PROGRESS, HAS_PRINT_PROGRESS)
   static MarlinUI::progress_t progress = 0;
+  static char progressStr[3];
   static char bufferc[13];
 #endif
 
 #if HAS_EXTRA_PROGRESS
 
   static void prepare_time_string(const duration_t &time) {
-    char str1[6];
+    // 0123456789
+    // --:--  99%
+    // ---:-- 99%
+    char str[6];
     memset(&bufferc[5], 0x20, 5); // partialy fill with spaces to avoid artifacts and terminator
 
-    time.toDigital(str1);
-    strcpy(&bufferc[0], str1);
+    time.toDigital(str);
+    strcpy(&bufferc[0], str);
 
-    strcpy(&bufferc[8], ui8tostr3rj(progress / (PROGRESS_SCALE)));
-    bufferc[11] = '%';
+    memcpy(&bufferc[6], progressStr, 3);
+    bufferc[9] = '%';
   }
 
   #if ENABLED(SHOW_PROGRESS_PERCENT)
@@ -555,12 +559,13 @@ void MarlinUI::draw_status_screen() {
     // Progress update to avoid float math on each LCD draw
     #if HAS_PRINT_PROGRESS
       progress = TERN(HAS_PRINT_PROGRESS_PERMYRIAD, get_progress_permyriad, get_progress_percent)();
+      memcpy(&progressStr[0], ui8tostr3rj(progress), 3);
 
       static uint8_t lastProgress = 0xFF;
       const uint8_t p = progress & 0xFF;
       if (p != lastProgress) {
         lastProgress = p;
-        progress_bar_solid_width = u8g_uint_t((PROGRESS_BAR_WIDTH - 2) * (progress / (PROGRESS_SCALE)) * 0.01f);
+        progress_bar_solid_width = u8g_uint_t((PROGRESS_BAR_WIDTH - 2) * (progress) * 0.01f);
       }
     #endif
   }
