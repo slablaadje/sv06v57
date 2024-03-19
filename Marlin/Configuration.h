@@ -45,7 +45,7 @@
 
 #define KS_MARLIN_TITLE                 "Marlin ~~ )»<(((°>-"
 #define KS_CUSTOM_MACHINE_NAME          "SV06 KS"
-#define KS_SHORT_BUILD_VERSION          "2.1.2.57.5"
+#define KS_SHORT_BUILD_VERSION          "2.1.2.57.6"
 
 // Physical
 #define KS_X_BED_SIZE                   222
