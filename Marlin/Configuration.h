@@ -38,72 +38,6 @@
 #define CONFIGURATION_H_VERSION 02010300
 
 //===========================================================================
-//========================== KnightShade settings ===========================
-//===========================================================================
-
-// NOZZLE_TO_PROBE_OFFSET
-
-#define KS_MARLIN_TITLE                 "Marlin ~~ )»<(((°>-"
-#define KS_CUSTOM_MACHINE_NAME          "SV06 KS"
-#define KS_SHORT_BUILD_VERSION          "2.1.2.57.6"
-
-// Physical
-#define KS_X_BED_SIZE                   222
-#define KS_Y_BED_SIZE                   224
-#define KS_Z_MAX_POS                    250
-#define KS_X_MIN_POS                    -2
-#define KS_Y_MIN_POS                    -5
-
-// Leveling
-#define KS_GRID_POINTS_PER_AXIS         8
-
-// Motion
-#define KS_DEFAULT_MAX_ACCELERATION     { 1500, 1500, 100, 5000 } // Axes
-#define KS_DEFAULT_ACCELERATION         1500    // For printing moves
-#define KS_DEFAULT_RETRACT_ACCELERATION 1500    // E acceleration for retracts
-#define KS_DEFAULT_TRAVEL_ACCELERATION  1500    // X, Y, Z acceleration for travel (non printing) moves
-#define KS_XY_PROBE_FEEDRATE            (80*60) // mm/min (feedrates are in mm/min by default)
-#define KS_HOMING_FEEDRATE_MM_MIN       { (50*60), (50*60), (4*60) }
-#define KS_SHAPING_FREQ_X               36.4
-#define KS_SHAPING_ZETA_X               0.18f
-#define KS_SHAPING_FREQ_Y               39.5
-#define KS_SHAPING_ZETA_Y               0.12f
-
-// Stepper Motors
-#define KS_MOTOR_STEPS_PER_UNIT         { 80, 80, 800, 691.5 }
-#define KS_MOTOR_HOLD_MULTIPLIER        1
-#define KS_MOTOR_XY_HOLD_MULTIPLIER     0.8
-#define KS_MOTOR_XY_RUN_CURRENT         675
-#define KS_MOTOR_XY_HOME_CURRENT        320
-#define KS_MOTOR_XY_RSENSE              0.21
-
-#define KS_MOTOR_Z_RUN_CURRENT          900
-#define KS_MOTOR_Z_HOME_CURRENT         900
-#define KS_MOTOR_Z_HOLD_MULTIPLIER      0.66
-#define KS_MOTOR_Z_RSENSE               0.15
-
-#define KS_MOTOR_E_RUN_CURRENT          550
-#define KS_MOTOR_E_HOLD_MULTIPLIER      0.7
-#define KS_MOTOR_E_RSENSE               0.15
-
-#define KS_X_STALL_SENSITIVITY          68
-#define KS_Y_STALL_SENSITIVITY          62
-
-// PID
-#define KS_PID_FUNCTIONAL_RANGE         22    // Default 10
-#define KS_BANG_MAX                     230   // Limits current to nozzle while in bang-bang mode; 255=full current
-#define KS_PID_MAX                      200   // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
-#define KS_PID_K1                       0.95  // Smoothing, don't get this one
-#define KS_MAX_BED_POWER                255   // 0-255
-
-#define KS_DEFAULT_Kp                   20.9
-#define KS_DEFAULT_Ki                   2.53
-#define KS_DEFAULT_Kd                   43.1
-#define KS_DEFAULT_bedKp                153.9
-#define KS_DEFAULT_bedKi                24
-#define KS_DEFAULT_bedKd                657.6
-
-//===========================================================================
 //============================= Getting Started =============================
 //===========================================================================
 
@@ -126,7 +60,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Michael Hill, SV06)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "KS" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -718,7 +652,7 @@
 
 // Enable PIDTEMP for PID control or MPCTEMP for Predictive Model.
 // temperature control. Disable both for bang-bang heating.
-#define PIDTEMP          // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
+// defined up top #define PIDTEMP          // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
 //#define MPCTEMP        // ** EXPERIMENTAL **
 
 #define BANG_MAX KS_BANG_MAX     // Limits current to nozzle while in bang-bang mode; 255=full current
@@ -879,9 +813,6 @@
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
   #define PID_FUNCTIONAL_RANGE KS_PID_FUNCTIONAL_RANGE // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
-
-  #define PID_EDIT_MENU         // Add PID editing to the "Advanced Settings" menu. (~700 bytes of flash)
-  #define PID_AUTOTUNE_MENU     // Add PID auto-tuning to the "Advanced Settings" menu. (~250 bytes of flash)
 #endif
 
 // @section safety
@@ -2188,7 +2119,7 @@
  * Commands to execute at the end of G29 probing.
  * Useful to retract or move the Z probe out of the way.
  */
-#define Z_PROBE_END_SCRIPT "G1 Z10 F3000\nG1 X110 Y110"
+#define Z_PROBE_END_SCRIPT    KS_Z_PROBE_END_SCRIPT
 
 // @section homing
 
