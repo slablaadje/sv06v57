@@ -244,7 +244,7 @@ void GcodeSuite::M420() {
     report_current_position();
 }
 
-void GcodeSuite::M420_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M420_report(const bool forReplay=true) {
   report_heading_etc(forReplay, F(
     TERN(MESH_BED_LEVELING, "Mesh Bed Leveling", TERN(AUTO_BED_LEVELING_UBL, "Unified Bed Leveling", "Auto Bed Leveling"))
   ));
@@ -256,6 +256,6 @@ void GcodeSuite::M420_report(const bool forReplay/*=true*/) {
     , F(" ; Leveling ")
   );
   serialprintln_onoff(planner.leveling_active);
-}
+}*/
 
 #endif // HAS_LEVELING

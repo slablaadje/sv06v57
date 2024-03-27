@@ -705,7 +705,7 @@ private:
 
   static void M85();
   static void M92();
-  static void M92_report(const bool forReplay=true, const int8_t e=-1);
+  //static void M92_report(const bool forReplay=true, const int8_t e=-1);
 
   #if ENABLED(M100_FREE_MEMORY_WATCHER)
     static void M100();
@@ -1017,7 +1017,7 @@ private:
 
   #if HAS_LEVELING
     static void M420();
-    static void M420_report(const bool forReplay=true);
+    //static void M420_report(const bool forReplay=true);
     static void M421();
   #endif
 
@@ -1092,7 +1092,7 @@ private:
   #if ENABLED(ADVANCED_PAUSE_FEATURE)
     static void M600();
     static void M603();
-    static void M603_report(const bool forReplay=true);
+    //static void M603_report(const bool forReplay=true);
   #endif
 
   #if HAS_DUPLICATION_MODE

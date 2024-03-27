@@ -42,7 +42,9 @@
  */
 void GcodeSuite::M603() {
 
-  if (!parser.seen("TUL")) return M603_report();
+  if (!parser.seen("TUL"))
+    return;
+    //return M603_report();
 
   const int8_t target_extruder = get_target_extruder_from_command();
   if (target_extruder < 0) return;
@@ -64,7 +66,7 @@ void GcodeSuite::M603() {
   }
 }
 
-void GcodeSuite::M603_report(const bool forReplay/*=true*/) {
+/*void GcodeSuite::M603_report(const bool forReplay=true) {
   report_heading(forReplay, F(STR_FILAMENT_LOAD_UNLOAD));
 
   #if EXTRUDERS == 1
@@ -78,6 +80,6 @@ void GcodeSuite::M603_report(const bool forReplay/*=true*/) {
       say_units();
     }
   #endif
-}
+}*/
 
 #endif // ADVANCED_PAUSE_FEATURE
