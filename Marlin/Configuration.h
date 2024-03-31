@@ -91,7 +91,11 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_SOVOL_V131
+  #if KS_BTT
+    #define MOTHERBOARD BOARD_BTT_SKR_MINI_E3_V3_0
+  #else
+    #define MOTHERBOARD BOARD_SOVOL_V131
+  #endif
 #endif
 
 /**
@@ -1349,7 +1353,9 @@
  *      - normally-closed switches to GND and D32.
  *      - normally-open switches to 5V and D32.
  */
-#define Z_MIN_PROBE_PIN PB1 // Pin 32 is the RAMPS default
+#if DISABLED(KS_BTT)
+  #define Z_MIN_PROBE_PIN PB1 // Pin 32 is the RAMPS default
+#endif
 
 /**
  * Probe Type
