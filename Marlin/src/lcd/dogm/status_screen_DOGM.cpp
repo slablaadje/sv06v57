@@ -455,7 +455,7 @@ FORCE_INLINE void _draw_axis_value(const AxisEnum axis, const char *value, const
     // 0123456789
     // --:--  99%
     // ---:-- 99%
-    char str[6];
+    char str[13];
     memset(&bufferc[5], 0x20, 5); // partialy fill with spaces to avoid artifacts and terminator
 
     time.toDigital(str);
