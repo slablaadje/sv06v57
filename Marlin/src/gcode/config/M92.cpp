@@ -44,8 +44,13 @@ void GcodeSuite::M92() {
 
   // No arguments? Show M92 report.
   if (!parser.seen(STR_AXES_LOGICAL TERN_(MAGIC_NUMBERS_GCODE, "HL")))
+  {
+  #if ENABLED(KS_M92_Report)
+    return M92_report(true, target_extruder);
+  #else
     return;
-    //return M92_report(true, target_extruder);
+  #endif
+  }
 
   LOOP_LOGICAL_AXES(i) {
     if (parser.seenval(AXIS_CHAR(i))) {
@@ -91,7 +96,9 @@ void GcodeSuite::M92() {
   #endif
 }
 
-/* void GcodeSuite::M92_report(const bool forReplay=true, const int8_t e=-1) {
+#if ENABLED(KS_M92_Report)
+
+ void GcodeSuite::M92_report(const bool forReplay/*=true*/, const int8_t e/*=-1*/) {
   report_heading_etc(forReplay, F(STR_STEPS_PER_UNIT));
   SERIAL_ECHOPGM_P(LIST_N(DOUBLE(NUM_AXES),
     PSTR("  M92 X"), LINEAR_UNIT(planner.settings.axis_steps_per_mm[X_AXIS]),
@@ -121,4 +128,6 @@ void GcodeSuite::M92() {
   #else
     UNUSED(e);
   #endif
-}*/
+}
+
+#endif
