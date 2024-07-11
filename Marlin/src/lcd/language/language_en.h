@@ -77,7 +77,7 @@ namespace Language_en {
   LSTR MSG_DEBUG_MENU                     = _UxGT("Debug Menu");
   LSTR MSG_PROGRESS_BAR_TEST              = _UxGT("Progress Bar Test");
   LSTR MSG_HOMING                         = _UxGT("Homing");
-  LSTR MSG_AUTO_HOME                      = _UxGT("Auto Home");
+  LSTR MSG_AUTO_HOME                      = _UxGT("Home ALL");
   LSTR MSG_AUTO_HOME_A                    = _UxGT("Home @");
   LSTR MSG_AUTO_HOME_X                    = _UxGT("Home X");
   LSTR MSG_AUTO_HOME_Y                    = _UxGT("Home Y");
@@ -821,7 +821,7 @@ namespace Language_en {
   LSTR MSG_TMC_DRIVERS                    = _UxGT("TMC Drivers");
   LSTR MSG_TMC_CURRENT                    = _UxGT("Driver Current");
   LSTR MSG_TMC_HYBRID_THRS                = _UxGT("Hybrid Threshold");
-  LSTR MSG_TMC_HOMING_THRS                = _UxGT("Sensorless Homing");
+  LSTR MSG_TMC_HOMING_THRS                = _UxGT("Stall Tendency");
   LSTR MSG_TMC_STEPPING_MODE              = _UxGT("Stepping Mode");
   LSTR MSG_TMC_STEALTH_ENABLED            = _UxGT("StealthChop Enabled");
   LSTR MSG_SERVICE_RESET                  = _UxGT("Reset");

@@ -61,7 +61,7 @@
 #include "../../feature/x_twist.h"
 #endif 
 
-void menu_tmc();
+//void menu_tmc();
 void menu_backlash();
 
 #if HAS_MOTOR_CURRENT_DAC
@@ -733,9 +733,9 @@ void menu_advanced_settings() {
     SUBMENU(MSG_DRIVE_STRENGTH, menu_pwm);
   #endif
 
-  #if HAS_TRINAMIC_CONFIG
+  /*#if HAS_TRINAMIC_CONFIG
     SUBMENU(MSG_TMC_DRIVERS, menu_tmc);
-  #endif
+  #endif*/
 
   #if SHOW_MENU_ADVANCED_TEMPERATURE
     SUBMENU(MSG_TEMPERATURE, menu_advanced_temperature);
@@ -774,13 +774,13 @@ void menu_advanced_settings() {
     SUBMENU(MSG_PASSWORD_SETTINGS, password.access_menu_password);
   #endif
 
-  #if ENABLED(EEPROM_SETTINGS) && DISABLED(SLIM_LCD_MENUS)
+/*  #if ENABLED(EEPROM_SETTINGS) && DISABLED(SLIM_LCD_MENUS)
     CONFIRM_ITEM(MSG_INIT_EEPROM,
       MSG_BUTTON_INIT, MSG_BUTTON_CANCEL,
       ui.init_eeprom, nullptr,
       GET_TEXT_F(MSG_INIT_EEPROM), (const char *)nullptr, F("?")
     );
-  #endif
+  #endif*/
 
   END_MENU();
 }

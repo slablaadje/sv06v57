@@ -173,7 +173,7 @@ void menu_tmc_current() {
 
 void menu_tmc() {
   START_MENU();
-  BACK_ITEM(MSG_ADVANCED_SETTINGS);
+  BACK_ITEM(MSG_CONFIGURATION);
   SUBMENU(MSG_TMC_CURRENT, menu_tmc_current);
   TERN_(HYBRID_THRESHOLD,   SUBMENU(MSG_TMC_HYBRID_THRS, menu_tmc_hybrid_thrs));
   TERN_(SENSORLESS_HOMING,  SUBMENU(MSG_TMC_HOMING_THRS, menu_tmc_homing_thrs));

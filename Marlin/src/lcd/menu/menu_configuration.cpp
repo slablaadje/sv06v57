@@ -60,6 +60,7 @@
 #define HAS_DEBUG_MENU ENABLED(LCD_PROGRESS_BAR_TEST)
 
 void menu_advanced_settings();
+void menu_tmc();
 #if EITHER(DELTA_CALIBRATION_MENU, DELTA_AUTO_CALIBRATION)
   void menu_delta_calibrate();
 #endif
@@ -493,6 +494,10 @@ void menu_configuration() {
 
   SUBMENU(MSG_ADVANCED_SETTINGS, menu_advanced_settings);
 
+  #if HAS_TRINAMIC_CONFIG
+    SUBMENU(MSG_TMC_DRIVERS, menu_tmc);
+  #endif
+
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
     SUBMENU(MSG_ZPROBE_ZOFFSET, lcd_babystep_zoffset);
   #elif HAS_BED_PROBE
@@ -586,6 +591,14 @@ void menu_configuration() {
   #endif
 
   if (!busy) ACTION_ITEM(MSG_RESTORE_DEFAULTS, ui.reset_settings);
+
+  #if ENABLED(EEPROM_SETTINGS) && DISABLED(SLIM_LCD_MENUS)
+    CONFIRM_ITEM(MSG_INIT_EEPROM,
+      MSG_BUTTON_INIT, MSG_BUTTON_CANCEL,
+      ui.init_eeprom, nullptr,
+      GET_TEXT_F(MSG_INIT_EEPROM), (const char *)nullptr, F("?")
+    );
+  #endif
 
   END_MENU();
 }
